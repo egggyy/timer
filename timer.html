@@ -1,0 +1,88 @@
+﻿<!DOCTYPE HTML>
+<html lang="ch">
+	<body onload="doStartClock();">
+		<p id="timePar" style="font-size:10em;font-family:'方正兰亭圆简体_粗';text-align:center;">正在加载时间...</p>
+	    <p>本网站提供的时间为您的系统时间，并不代表标准时间</p>
+		<button id="button"style="background-color:white;" onmouseover="whenOnMouseOver('button');" onmouseout="whenOnMouseOut('button');" onclick="doClockTickAgain();">重新加载时钟</button>
+		<input type="time" id="input" style="background-color:white;" onmouseover="whenOnMouseOver('input');" onmouseout="whenOnMouseOut('input');"></input>
+		<button id="button2" style="background-color:white;" onmouseover="whenOnMouseOver('button2');" onmouseout="whenOnMouseOut('button2');" onclick="doTX();">启用（下方0表示未设置，1表示设置）</button>
+		<div style="width:230px;height:20px;">
+			<p id="show" onmouseover="whenOnMouseOver('show');" onmouseout="whenOnMouseOut('show');"> </p>
+		</div>
+		<p id="write">0</p>
+	</body>
+	<script>
+			var TXTrueOrFalse = 0;
+			var sdgxnum = 1
+			function doStartClock(){
+				setInterval(doClockTick,1);
+			}
+			function doClockTick(){
+				var inputSetTime = document.getElementById("input");
+				
+				var trueOrFalse = document.getElementById("write");
+				var TXTrueOrFalse = trueOrFalse.textContent;
+				
+				var currentDate = new Date();
+				var hours = currentDate.getHours();
+				var mins = currentDate.getMinutes();
+				var secs = currentDate.getSeconds();
+				hours = (hours < 10 ? "0" : "") + hours;
+        		    	mins = (mins < 10 ? "0" : "") + mins;
+            			secs = (secs < 10 ? "0" : "") + secs;
+				var timeString = hours+":"+mins+":"+secs;
+				var outputElement = document.getElementById("timePar");
+				outputElement.textContent = timeString;
+				
+				
+				if (TXTrueOrFalse == 1){
+					var setTime = input.value;
+					var nowTime = hours+":"+mins;
+					if (setTime === nowTime){
+						alert("时间到!!!");
+						trueOrFalse.textContent = "0";
+					}
+				console.log("时间刷新");
+				}
+			}
+			function whenOnMouseOver(id){
+				var output = document.getElementById(id);
+				output.style=("background-color:skyblue;");
+				console.log("有一个id为"+id+"改变颜色为SKYBLUE");
+			}
+			function whenOnMouseOut(id){
+				var output = document.getElementById(id);
+				output.style=("background-color:white;");
+				console.log("有一个id为"+id+"改变颜色为WHITE");
+			}
+			function doClockTickAgain(){
+				doClockTick();
+				var currentDate = new Date();
+				var hours = currentDate.getHours();
+				var mins = currentDate.getMinutes();
+				var secs = currentDate.getSeconds();
+				hours = (hours < 10 ? "0" : "") + hours;
+        		    	mins = (mins < 10 ? "0" : "") + mins;
+            			secs = (secs < 10 ? "0" : "") + secs;
+				var timeString = "第"+sdgxnum+"次更新成功，在"+hours+":"+mins+":"+secs;
+				var outputElement = document.getElementById("show");
+				outputElement.textContent = timeString;
+				sdgxnum = sdgxnum + 1;
+				console.log("更新了一次时间");
+			}
+			function doTX(){
+				var trueOrFalse = document.getElementById("write");
+				var TXTrueOrFalse = trueOrFalse.textContent;
+				if (TXTrueOrFalse == 1){
+					trueOrFalse.textContent = "0";
+					alert("取消成功！");
+					console.log("取消了设置");
+				} else{
+					trueOrFalse.textContent = "1";
+					alert("设置成功！");
+					console.log("设置了");
+				}
+				console.log("设置值被更改");
+			}
+		</script>
+</html>
