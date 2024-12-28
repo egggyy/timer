@@ -417,7 +417,7 @@
 
             reminders.push(fullTime);
             updateReminderList();
-            alert(`提醒时间 ${fullTime} 已添加`);
+            showAlert(`提醒时间 ${fullTime} 已添加`);
         }
 
         function updateReminderList() {
@@ -440,7 +440,7 @@
         }
 
         function showAlert(reminder) {
-            alertBox.textContent = `提醒时间 ${reminder} 到了！`;
+            alertBox.textContent = `提醒 ${reminder} 到了！`;
             alertBox.style.display = 'block';
 
             try {
@@ -448,8 +448,6 @@
             } catch (e) {
                 console.error('Alert sound failed to play:', e);
             }
-
-            alert(`提醒时间 ${reminder} 到了！`);
 
             setTimeout(() => {
                 alertBox.style.display = 'none';
